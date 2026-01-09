@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client/extension";
+import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient({
     log: 
@@ -8,7 +8,7 @@ const prisma = new PrismaClient({
 })
 
 //Fonction de connexion a notre base de donnée
-const connect = async () =>{
+const connectDB = async () =>{
     try{
         await prisma.$connect();
         console.log("DB connected via Prisma");
@@ -19,8 +19,8 @@ const connect = async () =>{
 };
 
 //Fonction de deconnexion a notre base de donnée
-const deconnect = async () =>{
+const disconnectDB = async () =>{
     await prisma.$disconnect();
 };
 
-export  {prisma, connect, deconnect} 
+export  {prisma, connectDB, disconnectDB} 
