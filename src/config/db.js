@@ -1,14 +1,15 @@
+import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
+import { PrismaNeonHttp } from "@prisma/adapter-neon";
+
+const adapter = new PrismaNeonHttp(process.env.DATABASE_URL);
 
 const prisma = new PrismaClient({
-    datasource: {
-        url: process.env.DATABASE_URL
-    },  
-    log: 
-    process.env.NODE_ENV === 'development' 
-        ? ['query', 'error', 'warn'] 
+    adapter,
+    log: process.env.NODE_ENV === 'development'
+        ? ['query', 'error', 'warn']
         : ['error'],
-})
+});
 
 //Fonction de connexion a notre base de donnée
 const connectDB = async () =>{
